@@ -9,6 +9,8 @@ import json
 import requests
 #import urllib.request, urllib.error
 
+import os
+print (os.getcwd())
 
 app = Flask(__name__)
 
@@ -91,7 +93,7 @@ def get_meteo():
 # FUNCTIONS RELATIVE TO IOT
 
 def read_json():
-    with open('datatrans.json', 'r') as f:
+    with open('./files/datatrasf.json', 'r') as f:
         data = json.load(f)
         return data
 

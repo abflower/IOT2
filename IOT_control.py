@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import requests
 import time
 
+
 # global variables
 
 time_stamp = ''
@@ -271,7 +272,7 @@ def h_collect_graph_data(value, title):
 
 # ----- main body --------
 
-with open('settings.json', 'r') as f:
+with open('./files/auto_settings.json', 'r') as f:
 
 
         events_list = {}
@@ -284,7 +285,7 @@ with open('settings.json', 'r') as f:
 
         while True:
 
-            with open('datatrans.json', 'w') as trans:
+            with open('./files/datatrasf.json', 'w') as trans:
 
                 data_trans = {}
                 gather_temp_humidity()
