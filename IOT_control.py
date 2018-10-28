@@ -1,7 +1,7 @@
 from datetime import *
 from time import *
 import json
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import requests
 import time
 
