@@ -1,0 +1,334 @@
+body {
+       background:white;
+       max-width: 80%;
+       margin: auto;
+        }
+
+.grid{
+  display: grid;
+ }
+
+
+.page_cont{
+ grid-template-columns: repeat( auto-fill, minmax(400px, 600px) minmax(400px, 600px)  );
+  grid-template-rows: auto, 1fr;
+  grid-gap: 5px;
+}
+
+
+.col{
+  background: #fcf2de;
+}
+
+#header{
+  grid-column: 1 / span 2;
+  grid-row-start: 1;
+  padding: 20px;
+  font-size: 200%;
+  backround-color: #fcf2de;
+}
+
+#update_time{
+  grid-column: 2;
+  grid-row-start: 1;
+  justify-self: right;
+  padding: 10px;
+  font-size:80%;
+}
+
+#left{
+  grid-column-start: 1;
+  grid-row-start: 2;
+}
+
+.meteo_box{
+  grid-template-columns: 20% 12% 20% 11% 11% 11% 15%;
+  grid_template-rows: auto, auto;
+  padding: 5px;
+}
+
+.weather_w{
+    align-self: center;
+    justify-self: center;
+  
+}
+
+#city_name{
+  grid-column: 1;
+  grid-row: 1 / 2;
+}
+
+#city_temp{
+  grid-column: 2;
+  grid-row: 1;
+  border: 1px lightgrey dotted;
+  padding: 10px;
+  background: white;
+  border-radius: 50%;
+}
+
+#city_temp_l{
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#weather_sym{
+  grid-column: 3;
+  grid-row: 1;
+}
+  
+#weather_descr{
+  grid-column: 3;
+  grid-row: 2;
+  text-align: center;
+}
+
+#bott_temp{
+  grid-column: 4;
+  grid-row: 1 / 2;
+  border: 1px lightgrey dotted;
+  padding: 10px;
+  color: white;
+  background: blue;
+  border-radius: 50%;
+  }
+
+#bott_temp_l{
+  grid-column: 4;
+  grid-row: 2;}
+
+#top_temp{
+  grid-column: 5;
+  grid-row: 1 / 2;
+  border: 1px lightgrey dotted;
+  padding: 10px;
+  color: white;
+  background: red;
+  border-radius: 50%;
+}
+
+#top_temp_l{
+  grid-column: 5;
+  grid-row: 2;
+}
+
+#city_hum{
+  grid-column: 6;
+  grid-row: 1 / 2;
+  border: 1px lightgrey dotted;
+  padding: 10px;
+  background: white;
+  border-radius: 50%;
+}
+
+#city_hum_l{
+  grid-column: 6;
+  grid-row: 2;}
+
+#pressure{
+  grid-column: 7;
+  grid-row: 1 / 2;
+  border: 1px lightgrey dotted;
+  padding: 10px;
+  /*background: white;*/
+  border-radius: 50%;
+}
+
+
+#pressure_l{
+  grid-column: 7;
+  grid-row: 2;
+}
+.news_box{
+  grid-template-columns: auto;
+  grid_template-rows: auto;
+  padding: 15px;
+}
+
+#news_text{
+  rid-column: 1;
+  grid-row: 1;
+  overflow: scroll;
+  background: white;
+  padding:10px;
+  height:180px;
+  overflow:auto;
+  font-family:sans-serif;
+  padding:10px;
+  border: 1px lightgrey dotted;
+
+}
+
+
+#right{
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.home_data{
+  grid-template-columns: auto auto auto auto auto;
+  grid_template-rows: auto auto;
+  padding: 15px;
+}
+
+.home_w{
+    align-self: center;
+    justify-self: left;
+}
+
+#data_name{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+
+#home_temp{
+  grid-column: 2;
+  grid-row: 1;
+  border: 1px lightgrey dotted;
+  padding: 10px;
+  background: white;
+  border-radius: 50%;
+  justify-self: center;
+}
+
+#temp_lab{
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#home_hum{
+  grid-column: 4;
+  grid-row: 1;
+  border: 1px lightgrey dotted;
+  padding: 10px;
+  background: white;
+  border-radius: 50%;
+  justify-self: center;
+}
+
+#hum_lab{
+  grid-column: 5;
+  grid-row: 1;
+}
+
+.graphs{
+  grid-template-columns:50% 50%;
+  grid_template-rows: auto;
+}
+
+.graph{
+     align-self: center;
+    justify-self: center;
+
+}
+
+#graph_temp{
+  grid-column: 1;
+  grid-row: 1;
+
+}
+
+#graph_hum{
+  grid-column: 2;
+  grid-row: 1;
+
+
+}
+
+.graph>img {
+  object-fit: cover;
+  width: 90%;
+  padding: 15px;
+}
+
+
+.auto_switch{
+  grid-template-columns: auto;
+  grid_template-rows: auto;
+  padding: 15px;
+  margin: auto;
+}
+
+/* switch settings*/
+
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #34A7C1; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 56px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+/* end switch settings*/
+
+.active_auto{
+  grid-template-columns: auto;
+  grid_template-rows: auto;
+  padding: 5px;
+  margin: auto;
+  }
+
+
+/* font style */
+
+body {
+font-family: sans-serif;
+}
+
+.c_title{
+  padding: 15px;
+  font-weight: bold;
+  font-size: 140%;
+}
+
+.title{
+  padding: 20px 0px 5px 15px;
+  font-weight: bold;
+}
+
+
+/* color for pressure */
+.dark_red{background:#7c0101}
+.red {background:#bc0000}
+.orange {background:#e28f00}
+.green {background:#3a9606}
+.light_green{background:#64e51b}

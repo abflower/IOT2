@@ -1,0 +1,113 @@
+
+
+  <!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="refresh" content="300">
+
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+    <script src="https://code.jquery.com/jquery-1.7.2.js"></script>
+      <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <title>Alessandro's portal</title>
+  </head>
+  <body>
+    <div class="grid page_cont">
+      <div class="col" id='header'>
+      <div class="page_title">Alessandro's portal</div>
+    </div> <!-- end header -->
+      <div id="update_time">Last updated: {{time}}</div>
+      <div class='col' id="left">
+        <div class="c_title">Meteo & news</div>
+        {% for meteo in meteo%}
+        <div class="grid meteo_box">
+        
+          <div class="weather_w" id="city_name">{{meteo.name}}</div>
+          <div class="weather_w" id="city_temp">{{meteo.temperature}}</div>
+          <div class="weather_w" id="city_temp_l">°C</div>
+          <div class="weather_w" id="weather_sym">{{meteo.symbol}}</div>
+          <div class="weather_w" id="weather_descr">{{meteo.description}}</div>
+          <div class="weather_w" id="bott_temp">{{meteo.min}}</div>
+          <div class="weather_w" id="bott_temp_l">Min</div>
+          <div class="weather_w" id="top_temp">{{meteo.max}}</div>
+           <div class="weather_w" id="top_temp_l">Max</div>
+          <div class="weather_w" id="city_hum">{{meteo.hum}}</div>
+          <div class="weather_w" id="city_hum_l">%</div>
+          <div class="weather_w" id="pressure" data-color={{meteo.pressure}}>{{meteo.pressure}}</div>
+          <div class="weather_w" id="pressure_l">mbar</div>
+        </div> <!-- end of meteo_box -->
+          {% endfor %}
+
+          <div class="title">News from Italy</div>
+          <div class="grid news_box">
+          <div id="news_text">
+              {% for article in news_ITA%}
+              <b><a href="{{article.link}}" target="_blank">{{article.title}}</a></b><br />
+              <i>{{article.published}}</i><br />
+              <p>{{article.summary}}</p>
+              <hr >
+              {% endfor %}
+          </div> <!-- end of news_text -->
+        </div> <!-- end of news_box -->
+
+          <div class="title">News from United Kingdom</div>
+          <div class="grid news_box">
+          <div id="news_text">
+               {% for article in news_UK%}
+              <b><a href="{{article.link}}" target="_blank">{{article.title}}</a></b><br />
+              <i>{{article.published}}</i><br />
+              <p>{{article.summary}}</p>
+              <hr >
+              {% endfor %}
+          </div> <!-- end of news_text -->
+        </div> <!-- end of news_box -->
+
+      </div> <!-- end "left" -->
+       <div class='col' id="right">
+        <div class="c_title">My home</div>
+        <div class="grid home_data">
+        <div class="home_w" id="data_name">Bedroom</div>
+        <div class="home_w" id="home_temp">{{t_and_u.temp}}</div>
+          <div class="home_w" id="temp_lab">°C Temperature</div>
+        <div class="home_w" id="home_hum">{{t_and_u.hum}}</div>
+          <div class="home_w" id="hum_lab">% Humidity</div>
+        
+        </div> <!-- end home_data -->
+          <div class="grid graphs">
+          <div class="graph" id="graph_temp"><img src="{{ url_for('static', filename='images/Temperature.png') }}">
+          </div>
+          <div class="graph" id="graph_hum"><img src="{{ url_for('static', filename='images/Humidity.png') }}">
+          </div>
+          </div> <!-- end graphs -->
+        <div class="title switch_title">Home automation</div>
+        <div class="grid auto_switch">       
+<div class="onoffswitch">
+  <!-- In order to change or check the status of the switch change the status of checkbox (see 'checked') -->
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div>        </div> <!-- end auto_switch -->
+        <div class="title active_title">Active automations</div>
+        <div class="grid active_auto">
+          <ul id="list">
+              {% for event in automations %}
+              <li>{{event}}</li></ul>
+            {% endfor %}
+      </div>
+       <div class="title" id="check">Automation software check: {{check}}</div>
+
+       </div><!-- end "right" -->
+    </div>
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
