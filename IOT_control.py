@@ -308,7 +308,6 @@ with open('./files/auto_settings.json', 'r') as f:
                 h_collect_graph_data(curr_humidity, 'Humidity')
                 trans.close()
                 #print(events_list)
-                #print('Temperature: '+str(curr_temp)+"°C  Humidity: "+str(curr_humidity)+"%\n")
                 print('++++++++++\n')
 
 
