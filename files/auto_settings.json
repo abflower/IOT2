@@ -6,8 +6,8 @@
       "days": "[0, 1, 2, 3, 4, 5, 6]",
       "time1": "19:00:00",
       "time2": "23:45:00",
-      "par1": "20",
-      "par2": "20",
+      "par1": "19",
+      "par2": "19",
       "function": "temp_check",
       "function2": "IFTTT"
     },
@@ -16,8 +16,8 @@
       "days": "[0, 1, 2, 3, 4, 5, 6]",
       "time1": "03:00:00",
       "time2": "04:00:00",
-      "par1": "20",
-      "par2": "20",
+      "par1": "19",
+      "par2": "19",
       "function": "temp_check",
       "function2": "IFTTT"
     },
@@ -27,8 +27,8 @@
       "days": "[0, 1, 2, 3, 4, 5, 6]",
       "time1": "06:30:00",
       "time2": "07:30:00",
-      "par1": "20",
-      "par2": "20",
+      "par1": "19",
+      "par2": "19",
       "function": "temp_check",
       "function2": "IFTTT"
     }
