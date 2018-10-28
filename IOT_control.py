@@ -1,7 +1,7 @@
 from datetime import *
 from time import *
 import json
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import requests
 import time
 
@@ -304,8 +304,8 @@ with open('./files/auto_settings.json', 'r') as f:
                 data_trans["check"] = time_stamp
                 print(data_trans)
                 json.dump(data_trans, trans)
-                #t_collect_graph_data(curr_temp, 'Temperature')
-                #h_collect_graph_data(curr_humidity, 'Humidity')
+                t_collect_graph_data(curr_temp, 'Temperature')
+                h_collect_graph_data(curr_humidity, 'Humidity')
                 trans.close()
                 #print(events_list)
                 print('++++++++++\n')
