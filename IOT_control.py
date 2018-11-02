@@ -25,41 +25,45 @@ h_ys = []
 
 def gather_temp_humidity():
     # send request for temperature
-    url = "http://192.168.0.25/temp"
-    global curr_temp
-    call = requests.get(url)
+    try:
+        url = "http://192.168.0.25/temp"
+        global curr_temp
+        call = requests.get(url)
 
     # check that the status of the reponse is 200
-    if '200' in str(call):
-        curr_temp = float(call.content)
+        if '200' in str(call):
+            curr_temp = float(call.content)
 
-    else:
-        curr_temp = None
+        else:
+            curr_temp = None
 
     # send request for humidity
-    url = "http://192.168.0.25/humidity"
-    global curr_humidity
-    call = requests.get(url)
+        url = "http://192.168.0.25/humidity"
+        global curr_humidity
+        call = requests.get(url)
 
     # check that the status of the reponse is 200
-    if '200' in str(call):
-        curr_humidity = int(requests.get(url).content)
-    else:
-        curr_humidity = None
+        if '200' in str(call):
+            curr_humidity = int(requests.get(url).content)
+        else:
+            curr_humidity = None
 
+    except:
+        curr_humidity = None
+        curr_temp = None
 
 
 def temp_check(check, t, arg2, function_name):
     if check == True:
+        print('curr:',curr_temp,'check:',float(t))
         # check if the value of curr_temp is None, if so switches off
         if curr_temp == None:
             return function_mappings[function_name](False)
-
         # perform temperature check
         if curr_temp < float(t):
             print('temp check: Temp low')
             return function_mappings[function_name](True)
-        if curr_temp >= float(t):
+        else:
             print('temp check: Temp high')
             return function_mappings[function_name](False)
     else:
@@ -67,26 +71,27 @@ def temp_check(check, t, arg2, function_name):
 
 
 
-
-
-
 def IFTTT(status):
     key = 'jTiMhMolHFo2ykbq64cxsbMi9rDDKGpvm0X80x-qloL'
     msg =''
-    if status == True:
-        msg = "low_temp"
-        if events_list.get(name) == 0:
-            del events_list[name]
-            events_list[name] = 1
-    if status == False:
-        msg = "temp_ok"
-        if events_list.get(name) == 1:
-            del events_list[name]
-            events_list[name] = 0
-    print('IFTTT: ',msg)
-    url = "https://maker.ifttt.com/trigger/%s/with/key/%s" % (msg, key)
-    requests.post(url)
-
+    try:
+        if status == True:
+            msg = "low_temp"
+            if events_list.get(name) == 0:
+                del events_list[name]
+                events_list[name] = 1 
+        if status == False:
+            msg = "temp_ok"
+            if events_list.get(name) == 1:
+                del events_list[name]
+                events_list[name] = 0
+        url = "https://maker.ifttt.com/trigger/%s/with/key/%s" % (msg, key)
+        requests.post(url)
+        print('IFTTT:',msg)
+    except:
+        del events_list[name]
+        events_list[name]=0
+        print('Error with IFTTT')
 
 # this maps string to names of the corresponding function so that they can be called
 
@@ -162,7 +167,7 @@ def t_add_and_graph(value):
 
     # Add x and y to lists
 
-    t_xs.append(datetime.now().strftime('%H:%M'))
+    t_xs.append(datetime.now().strftime('%H.%M'))
     t_ys.append(value)
 
     # Limit x and y lists to 20 items
@@ -222,7 +227,7 @@ def h_add_and_graph(value):
 
     # Add x and y to lists
 
-    h_xs.append(datetime.now().strftime('%H:%M'))
+    h_xs.append(datetime.now().strftime('%H.%M'))
     h_ys.append(value)
 
     # Limit x and y lists to 20 items
@@ -304,10 +309,16 @@ with open('./files/auto_settings.json', 'r') as f:
                 data_trans["check"] = time_stamp
                 print(data_trans)
                 json.dump(data_trans, trans)
-                t_collect_graph_data(curr_temp, 'Temperature')
-                h_collect_graph_data(curr_humidity, 'Humidity')
+                if curr_temp != None:
+                    t_collect_graph_data(curr_temp, 'Temperature')
+                else:
+                    pass
+                if curr_humidity != None:
+                    h_collect_graph_data(curr_humidity, 'Humidity')
+                else:
+                    pass               
                 trans.close()
-                #print(events_list)
+                print(events_list)
                 print('++++++++++\n')
 
 

@@ -50,38 +50,52 @@ def get_weather(query):
     api_key = 'ec4d49005a9bc48be23f2ce0d2503228'
     api_url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + api_key
     query_url = api_url.format(query)
-    uh = requests.get(query_url)
-    data = uh.content
+    try:
+        uh = requests.get(query_url)
+        data = uh.content
     #uh = urllib.request.urlopen(query_url)
     #data = uh.read().decode()
     # print(data)
-    parsed = json.loads(data)
-    weather = None
-    if parsed.get("weather"):
-        url = '<img src="http://openweathermap.org/img/w/'
-        icon_url = url + parsed["weather"][0]["icon"] + '.png">'
-        icon_url = Markup(icon_url)
-        min = str(parsed["main"]["temp_min"])
-        if len(min) == 1:
-            min = '0'+min
-        else:
-            pass
-        max = str(parsed["main"]["temp_max"])
-        if len(max) == 1:
-            max = '0' + max
-        else:
-            pass
+        parsed = json.loads(data)
+        weather = None
+        if parsed.get("weather"):
+            url = '<img src="http://openweathermap.org/img/w/'
+            icon_url = url + parsed["weather"][0]["icon"] + '.png">'
+            icon_url = Markup(icon_url)
+            min = str(parsed["main"]["temp_min"])
+            if len(min) == 1:
+                min = '0'+min
+            else:
+                pass
+            max = str(parsed["main"]["temp_max"])
+            if len(max) == 1:
+                max = '0' + max
+            else:
+                pass
 
+            weather = {
+                "name": parsed["name"],
+                "temperature": parsed["main"]["temp"],
+                "symbol": icon_url,
+                "description": parsed["weather"][0]["description"],
+                "min": min,
+                "max": max,
+                "hum": parsed["main"]["humidity"],
+                "pressure": parsed["main"]["pressure"]}
+        return weather
+    except:
         weather = {
-            "name": parsed["name"],
-            "temperature": parsed["main"]["temp"],
-            "symbol": icon_url,
-            "description": parsed["weather"][0]["description"],
-            "min": min,
-            "max": max,
-            "hum": parsed["main"]["humidity"],
-            "pressure": parsed["main"]["pressure"]}
-    return weather
+            "name": "Error",
+            "temperature": "0",
+            "symbol": '<img src="https://openweathermap.org/img/w/10d.png">',
+            "description": "Error",
+            "min": "0",
+            "max": "0",
+            "pressure": "0"}
+        return weather
+
+
+
 
 def get_meteo():
     meteo = []
@@ -93,10 +107,13 @@ def get_meteo():
 # FUNCTIONS RELATIVE TO IOT
 
 def read_json():
-    with open('./files/datatrasf.json', 'r') as f:
-        data = json.load(f)
+    try:
+        with open('/var/www/myapp/IOT2/files/datatrasf.json', 'r') as f:
+            data = json.load(f)
+            return data
+    except:
+        data = {"sensor":{"temp":0.0, "hum":0}, "automations":[], "check":"Error in retrieving data"}
         return data
-
 
 
 
